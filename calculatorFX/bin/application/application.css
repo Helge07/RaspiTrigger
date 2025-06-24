@@ -1,0 +1,26 @@
+
+
+ #body {
+    -fx-font-size: 30pt;
+}
+
+#numberField {	
+	-fx-pref-width: 400px;
+    -fx-pref-height: 400px;
+}
+
+.label {
+	-fx-border-color: black;
+    -fx-border-width: 0.2px;
+    -fx-background-color: white;
+    -fx-pref-width: 400px;
+    -fx-pref-height: 80px;
+}
+
+.button {
+	-fx-border-color: black;
+    -fx-border-width: 0.2px;
+    -fx-background-color: lightgrey;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 100px;
+}

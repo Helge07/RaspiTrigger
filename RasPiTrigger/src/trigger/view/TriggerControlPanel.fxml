@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.collections.*?>
+<?import utilities.IntegerTextField.*?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.Border?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trigger.view.TriggerControlPanelController">
+	<children>
+   
+		<!-- Vertical SplitPane:  contains the AncorPanes of the 'Button Area' and the 'tab-Panel' -->
+		<SplitPane orientation="VERTICAL" dividerPositions="0.08" layoutX="209.0" layoutY="59.0" prefHeight="800.0" prefWidth="980.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<items>
+				<!-- Button Area -->
+				<AnchorPane  prefHeight="90.0" prefWidth="960.0">
+	               <children>
+		                  <Button    layoutX="20.0"  layoutY="10.0"  text="START"         onAction="#handleSTART" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" />
+		                  <Button    layoutX="160.0" layoutY="10.0"  text="Read Project"  onAction="#handleReadProject" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" />
+		                  <Button    layoutX="300.0" layoutY="10.0"  text="Write Project" onAction="#handleWriteProject" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0"  />
+		                  <CheckBox  fx:id="EnableOutput" layoutX="620.0" layoutY="16.0"  text="Enable Output" onAction="#handleEnableOutput" mnemonicParsing="false" prefHeight="20.0" prefWidth="140.0" selected="True"  />
+		                  <Circle    fx:id="OutputsActive" layoutX="781.0" layoutY="27.0"  radius="10.0" fill="#00FF00"  stroke="#00A000" strokeType="INSIDE"  />
+		                  <Label     layoutX="800.0" layoutY="16.0"  text="Outputs active"      />
+					</children>
+				</AnchorPane>
+			  
+				<!-- Start of Tab Panel Area -->
+				<AnchorPane > 
+					<children>
+						<!-- Start of the Tab Panel: contains the tabs "Waterdrop Settings"  and "Global Configuration"  -->
+						<TabPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+							<tabs>
+							
+								<!-- Start of Tab "Waterdrop Settings" -->
+								<Tab closable="false" text="Waterdrop Settings">
+									<content>
+										<!--  Global container for the Waterdrop Settings tab -->
+										<VBox fillWidth="false">
+											<style>
+												-fx-padding: 10;
+												-fx-border-style:  solid inside;
+												-fx-border-width:  0;
+												-fx-border-insets: 0;
+												-fx-border-radius: 5;
+											</style>
+											<children>
+												<HBox prefHeight="250.0" prefWidth="950.0" >
+													<children>
+													
+														<!-- VBox container for camera and flash settings -->
+														<!-- ============================================ -->
+														<VBox prefHeight="180.0" prefWidth="380.0">
+															<style>
+																-fx-padding:       10;
+																-fx-border-style:  solid inside;
+																-fx-border-width:  2;
+																-fx-border-insets: 0;
+																-fx-border-radius: 5;
+																-fx-border-color:  gray;
+																-fx-background-color: white;
+															</style>
+															<children>
+	                                                			<Label prefHeight="30.0" prefWidth="350.0" text="Camera and Flash Settings">
+																	<font>
+																		<Font name="System Bold" size="15.0" />
+																	</font>
+	                                                			</Label>
+	                                                			<fx:define >  <ToggleGroup fx:id="toggleGroup1"/>  </fx:define >
+																<HBox prefHeight="35.0" prefWidth="299.0">
+																   <children>
+																      	<Label prefHeight="30.0" prefWidth="140.0" text="Camera Trigger:"/>
+																      	
+		                                                      			<RadioButton fx:id="radioCameraTrigger_1" mnemonicParsing="false" prefHeight="20.0" prefWidth="75.0" text="START"  selected="true" 
+		                                                      						 toggleGroup="$toggleGroup1" onAction="#handleRadioCameraTrigger">
+		                                                      				<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+		                                                      			</RadioButton>	
+		                                                      			
+		                                                      			<RadioButton fx:id="radioCameraTrigger_2" mnemonicParsing="false" prefHeight="20.0" prefWidth="80.0" text="Sensor1" selected="false" 
+		                                                      						 toggleGroup="$toggleGroup1" onAction="#handleRadioCameraTrigger">
+				                                                        	<HBox.margin> <Insets bottom="10.0" top="4.0"  /> </HBox.margin>
+																		</RadioButton>
+																   </children>
+																</HBox>
+																<fx:define > <ToggleGroup fx:id="toggleGroup2"/>  </fx:define >
+																<HBox prefHeight="30.0" prefWidth="350.0">
+																	<children>
+		                                                      			<Label prefHeight="35.0" prefWidth="140.0" text="Bulb Mode:" />
+		                                                      			<RadioButton fx:id="radioBulbMode_1" mnemonicParsing="false" prefHeight="20.0" prefWidth="75.0" text="on"  selected="true" 
+		                                                      						 toggleGroup="$toggleGroup2" onAction="#handleRadioBulbMode">
+		                                                      				<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+		                                                      			</RadioButton>
+		                                                      			
+		                                                      			<RadioButton fx:id="radioBulbMode_2" mnemonicParsing="false" prefHeight="20.0" prefWidth="75.0" text="off"  selected="false" 
+		                                                      						 toggleGroup="$toggleGroup2" onAction="#handleRadioBulbMode">
+				                                                        	<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+																		</RadioButton>
+																	</children>
+																</HBox>
+
+																<HBox prefHeight="35.0" prefWidth="299.0">
+																	<children>
+																		<Label prefHeight="20.0" prefWidth="140.0" text="Shutter Lag:" >
+																			<HBox.margin> <Insets top="8.0"  /> </HBox.margin>
+																		</Label>
+																			
+															            <Spinner fx:id="ShutterLagSpinner" prefWidth="90" editable="true">
+																			<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+																			<valueFactory>
+																				<javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory fx:id="ShutterLagFactory">
+																					<min>0</min>
+																					<max>10000</max>
+																					<amountToStepBy>10</amountToStepBy>
+																					<initialValue>150</initialValue>
+																					<wrapAround>false</wrapAround>
+																				</javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory>
+																			</valueFactory>
+																			<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+																		</Spinner>
+
+																		<Label prefHeight="20.0" prefWidth="5.0" text=" " />
+																			<ChoiceBox fx:id="TimeScale1"   prefWidth="60.0" value="ms">
+																				<HBox.margin> <Insets bottom="6.0" top="8.0"  /> </HBox.margin>
+																		    	<items>
+																			        <FXCollections fx:factory="observableArrayList">
+																			            <String fx:value="us" />
+																			            <String fx:value="ms" />
+																			            <String fx:value="s" />
+																			            <String fx:value="min" />
+																					</FXCollections>
+																				</items>
+																			</ChoiceBox>
+																	</children>
+																</HBox>
+																
+																<HBox prefHeight="35.0" prefWidth="299.0">
+																	<children>
+																		<Label prefHeight="20.0" prefWidth="140.0" text="Shutter Speed:" >
+																			<HBox.margin> <Insets top="8.0"  /> </HBox.margin>
+																		</Label>
+																																				
+															            <Spinner fx:id="ShutterSpeedSpinner" prefWidth="90" editable="true">
+																			<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+																			<valueFactory>
+																				<javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory fx:id="ShutterSpeedFactory">
+																					<min>0</min>
+																					<max>10000</max>
+																					<amountToStepBy>10</amountToStepBy>
+																					<initialValue>250</initialValue>
+																					<wrapAround>false</wrapAround>
+																				</javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory>
+																			</valueFactory>
+																			<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+																		</Spinner>
+															            
+																		<Label prefHeight="20.0" prefWidth="5.0" text=" " />
+																		
+																		<ChoiceBox fx:id="TimeScale2" prefWidth="60.0" value="ms">
+																			<HBox.margin> <Insets bottom="6.0" top="6.0"  /> </HBox.margin>
+																		    <items>
+																		        <FXCollections fx:factory="observableArrayList">
+																		            <String fx:value="us" />
+																		            <String fx:value="ms" />
+																		            <String fx:value="s" />
+																		            <String fx:value="min" />
+																				</FXCollections>
+																			</items>
+																		</ChoiceBox>
+																	</children>
+																</HBox>
+
+																<HBox prefHeight="35.0" prefWidth="299.0">
+																	<children>
+																		<Label fx:id="TimeToFlashLabel" prefHeight="20.0" prefWidth="140.0" text="Time to Flash:" >
+																			<HBox.margin> <Insets top="8.0"  /> </HBox.margin>
+																		</Label>																		
+															            
+															            <Spinner fx:id="TimeToFlashSpinner" prefWidth="90" editable="true">
+																			<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+																			<valueFactory>
+																				<javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory fx:id="TimeToFlashFactory">
+																					<min>0</min>
+																					<max>10000</max>
+																					<initialValue>250</initialValue>
+																					<wrapAround>false</wrapAround>
+																				</javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory>
+																			</valueFactory>
+																			<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+																		</Spinner>
+
+																		<Label prefHeight="20.0" prefWidth="5.0" text=" " />
+																		<ChoiceBox fx:id="TimeScale3" prefWidth="60.0" value="ms">
+																			<HBox.margin> <Insets bottom="6.0" top="6.0"  /> </HBox.margin>
+																		    <items>
+																		        <FXCollections fx:factory="observableArrayList">
+																		            <String fx:value="us" />
+																		            <String fx:value="ms" />
+																		            <String fx:value="s" />
+																		            <String fx:value="min" />
+																				</FXCollections>
+																			</items>
+																		</ChoiceBox>
+																	</children>
+																</HBox>																
+																
+																<HBox prefHeight="35.0" >
+																	<children>
+																		<Label prefHeight="20.0" prefWidth="140.0" text="#Flashes:" >
+																			<HBox.margin> <Insets top="8.0"  /> </HBox.margin>
+																		</Label>																											
+																		<Spinner fx:id="FlashNumberSpinner" prefWidth="90" >
+																			<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+																			<valueFactory>
+																				<javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory fx:id="FlashNumberFactory">
+																					<min>0</min>
+																					<max>3</max>
+																					<initialValue>1</initialValue>
+																					<wrapAround>true</wrapAround>
+																				</javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory>
+																			</valueFactory>
+																			<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+																		</Spinner>
+																	</children>
+																</HBox>																
+															</children>
+														</VBox>
+														<Label prefWidth="10.0" text=" "/>
+														
+														<!-- VBox container for valve settings -->
+														<!-- ================================= -->
+														<VBox prefHeight="180.0" prefWidth="550.0">
+															<style>
+																-fx-padding:       10;
+																-fx-border-style:  solid inside;
+																-fx-border-width:  2;
+																-fx-border-insets: 0;
+																-fx-border-radius: 5;
+																-fx-border-color:  gray;
+																-fx-background-color: white;
+															</style>
+															
+															<children>
+	                                                			<Label prefHeight="30.0" prefWidth="300.0" text="Valve Settings">
+																	<font><Font name="System Bold" size="15.0" /></font>
+	                                                			</Label>
+	                                                			
+													         	<HBox>
+														        	<Label text="number of valves:" prefWidth="135" >
+														            	<HBox.margin> <Insets top="8.0"  /> </HBox.margin>
+														            </Label>
+
+																	<Spinner fx:id="ValveNumberSpinner" prefWidth="90">
+																		<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+																		<valueFactory>
+																			<javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory fx:id="ValveNumberFactory">
+																				<min>0</min>
+																				<max>3</max>
+																				<initialValue>1</initialValue>
+																				<wrapAround>true</wrapAround>
+																			</javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory>
+																		</valueFactory>
+																		<HBox.margin> <Insets bottom="4.0" top="4.0"  /> </HBox.margin>
+																	</Spinner>														            
+														        </HBox>	                                                			
+	                                                																	 
+																<HBox prefHeight="180.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+																   <children>
+																      <GridPane>
+																        <columnConstraints>
+																          <ColumnConstraints   minWidth="10.0" prefWidth="60.0" />
+																            <ColumnConstraints prefWidth="60.0" />
+																            <ColumnConstraints minWidth="10.0" prefWidth="60.0" />
+																            <ColumnConstraints minWidth="10.0" prefWidth="60.0" />
+																            <ColumnConstraints minWidth="10.0" prefWidth="60.0" />
+																            <ColumnConstraints minWidth="10.0" prefWidth="60.0" />
+																            <ColumnConstraints minWidth="10.0" prefWidth="60.0" />
+																            <ColumnConstraints minWidth="10.0" prefWidth="60.0" />
+																            <ColumnConstraints minWidth="10.0" prefWidth="60.0" />
+																        </columnConstraints>
+																        <rowConstraints>
+																          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+																          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+																          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+																          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+																          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+																        </rowConstraints>
+																         <children>
+																         	<!-- column header labels -->
+																            <Label fx:id="numberDropsLabel" alignment="CENTER" text="#drops"  GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+																            	<font> <Font size="14.0"/> 	</font>
+																            </Label>
+																            <Label fx:id="closed1Label" alignment="CENTER" text="closed1" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+																            	<font> <Font size="14.0"/> 	</font>
+																            </Label>
+																            <Label fx:id="open1Label" alignment="CENTER" text="open1"   GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+																            	<font> <Font size="14.0"/> 	</font>
+																            </Label>
+																            <Label fx:id="closed2Label" alignment="CENTER" text="closed2" GridPane.columnIndex="4" GridPane.rowIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+																            	<font> <Font size="14.0"/> 	</font>
+																            </Label><Label fx:id="open2Label" alignment="CENTER" text="open2"   GridPane.columnIndex="5" GridPane.rowIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+																            	<font> <Font size="14.0"/> 	</font>
+																            </Label><Label fx:id="closed3Label" alignment="CENTER" text="closed3" GridPane.columnIndex="6" GridPane.rowIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+																            	<font> <Font size="14.0"/> 	</font>
+																            </Label><Label fx:id="open3Label" alignment="CENTER" text="open3"   GridPane.columnIndex="7" GridPane.rowIndex="0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+																            	<font> <Font size="14.0"/> 	</font>
+																            </Label>
+																            <!-- line header labels -->
+																            <Label fx:id="valve1Label" alignment="BASELINE_LEFT" text="valve 1:" GridPane.rowIndex="1" />
+																            <Label fx:id="valve2Label" alignment="BASELINE_LEFT" text="valve 2:" GridPane.rowIndex="2" />
+																            <Label fx:id="valve3Label" alignment="BASELINE_LEFT" text="valve 3:" GridPane.rowIndex="3" />
+																            
+																            <!-- interval time values of line 1 -->
+																            <TextField fx:id="numberDropsValve1" alignment="CENTER_RIGHT" text="3" GridPane.columnIndex="1" GridPane.rowIndex="1">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="closed11" alignment="CENTER_RIGHT" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="open11" alignment="CENTER_RIGHT" text="15" GridPane.columnIndex="3" GridPane.rowIndex="1">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="closed12" alignment="CENTER_RIGHT" text="100" GridPane.columnIndex="4" GridPane.rowIndex="1">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="open12" alignment="CENTER_RIGHT" text="15" GridPane.columnIndex="5" GridPane.rowIndex="1">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="closed13" alignment="CENTER_RIGHT" text="100" GridPane.columnIndex="6" GridPane.rowIndex="1">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="open13" alignment="CENTER_RIGHT" text="15" GridPane.columnIndex="7" GridPane.rowIndex="1">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            
+																            <!-- interval time values of line 2 -->
+																            <TextField fx:id="numberDropsValve2" alignment="CENTER_RIGHT" text="3" GridPane.columnIndex="1" GridPane.rowIndex="2">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="3.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="closed21" alignment="CENTER_RIGHT" text="30" GridPane.columnIndex="2" GridPane.rowIndex="2">
+																               <padding> <Insets bottom="2.0" left="2.0" right="4.0" top="2.0" />  </padding>
+																            </TextField>
+																            <TextField fx:id="open21" alignment="CENTER_RIGHT" text="15" GridPane.columnIndex="3" GridPane.rowIndex="2">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="closed22" alignment="CENTER_RIGHT" text="100" GridPane.columnIndex="4" GridPane.rowIndex="2">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="open22" alignment="CENTER_RIGHT" text="15" GridPane.columnIndex="5" GridPane.rowIndex="2">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="closed23" alignment="CENTER_RIGHT" text="100" GridPane.columnIndex="6" GridPane.rowIndex="2">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="open23" alignment="CENTER_RIGHT" text="15" GridPane.columnIndex="7" GridPane.rowIndex="2">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																               
+																            <!-- interval time values of line 3 -->
+																            </TextField>
+																            <TextField fx:id="numberDropsValve3" alignment="CENTER_RIGHT" text="3" GridPane.columnIndex="1" GridPane.rowIndex="3">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField fx:id="closed31" alignment="CENTER_RIGHT" text="60" GridPane.columnIndex="2" GridPane.rowIndex="3">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField  fx:id="open31" alignment="CENTER_RIGHT" text="15" GridPane.columnIndex="3" GridPane.rowIndex="3">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField  fx:id="closed32" alignment="CENTER_RIGHT" text="100" GridPane.columnIndex="4" GridPane.rowIndex="3">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField  fx:id="open32" alignment="CENTER_RIGHT" text="15" GridPane.columnIndex="5" GridPane.rowIndex="3">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField  fx:id="closed33" alignment="CENTER_RIGHT" text="100" GridPane.columnIndex="6" GridPane.rowIndex="3">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            <TextField  fx:id="open33" alignment="CENTER_RIGHT" text="15" GridPane.columnIndex="7" GridPane.rowIndex="3">
+																               <padding><Insets bottom="2.0" left="2.0" right="4.0" top="2.0" /></padding>
+																            </TextField>
+																            
+																            <ChoiceBox fx:id="TimeScale4" prefWidth="60.0" value="ms" GridPane.columnIndex="8" GridPane.rowIndex="1">
+																               	<GridPane.margin> <Insets bottom="4.0" top="4.0" /> </GridPane.margin>
+																               	<padding> <Insets top="-4.0" />  </padding>
+																               	<items>
+																					<FXCollections fx:factory="observableArrayList">
+																			            <String fx:value="us" />
+																			            <String fx:value="ms" />
+																			            <String fx:value="s" />
+																			            <String fx:value="min" />
+																					</FXCollections>
+																			    </items>
+																            </ChoiceBox>
+
+																            <ChoiceBox fx:id="TimeScale5" prefWidth="60.0" value="ms" GridPane.columnIndex="8" GridPane.rowIndex="2">
+																               	<GridPane.margin> <Insets bottom="4.0" top="4.0" /> </GridPane.margin>
+																               	<padding> <Insets top="-4.0" />  </padding>
+																               	<items>
+																					<FXCollections fx:factory="observableArrayList">
+																			            <String fx:value="us" />
+																			            <String fx:value="ms" />
+																			            <String fx:value="s" />
+																			            <String fx:value="min" />
+																					</FXCollections>
+																			    </items>
+																            </ChoiceBox>
+																             																             
+																            <ChoiceBox fx:id="TimeScale6" prefWidth="60.0" value="ms" GridPane.columnIndex="8" GridPane.rowIndex="3">
+																               	<GridPane.margin> <Insets bottom="4.0" top="4.0" /> </GridPane.margin>
+																               	<padding> <Insets top="-4.0" />  </padding>
+																               	<items>
+																					<FXCollections fx:factory="observableArrayList">
+																			            <String fx:value="us" />
+																			            <String fx:value="ms" />
+																			            <String fx:value="s" />
+																			            <String fx:value="min" />
+																					</FXCollections>
+																			    </items>
+																            </ChoiceBox>
+																         </children>
+																      </GridPane>
+																   </children>
+																</HBox>
+															</children>
+														</VBox>
+														<Label prefWidth="10.0" text=" "/>
+													
+														<!-- VBox for the output port allocation -->
+														<!--  ================================== -->								
+														<VBox prefHeight="180.0" prefWidth="180.0" >
+															<children>
+																<VBox prefHeight="180.0" prefWidth="180.0">
+																	<style>
+																		-fx-padding: 10;
+																		-fx-border-style: solid inside;
+																		-fx-border-width: 2;
+																		-fx-border-insets: 0;
+																		-fx-border-radius: 5;
+																		-fx-border-color: gray;
+																		-fx-background-color: white;
+																	</style>
+																		<children>
+																			<Label alignment="CENTER" prefHeight="20.0" text="Port/Device">
+																				<font><Font name="System Bold" size="15.0" /></font>
+																			</Label >
+																			
+																			<VBox prefHeight="120.0"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+																				<VBox.margin> <Insets top="20.0" /> </VBox.margin>
+																			    <children>
+																				   <HBox>
+																				   		<VBox.margin> <Insets top="10.0" /></VBox.margin>
+																					   	<Label alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="30.0" text="0:"/>
+																				   		<TextField fx:id="device1" alignment="CENTER_LEFT" prefWidth="70.0" text="d1" >
+																			               <padding> <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" /></padding>
+																			               <font><Font name="System Bold" size="13.0" /></font>
+																				        </TextField>
+																				   </HBox>
+																				   
+																				   <HBox>
+																					   	<Label alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="30.0" text="1:"  />
+																				   		<TextField fx:id="device2" alignment="CENTER_LEFT" prefWidth="70.0" text="d1">
+																			               <padding><Insets bottom="2.0" left="4.0" right="4.0" top="2.0" /></padding>
+																			               <font><Font name="System Bold" size="14.0" /></font>
+																				        </TextField>
+																				   </HBox>
+																				   
+																				   <HBox>
+																					   	<Label alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="30.0" text="2:"  />
+																				   		<TextField fx:id="device3" alignment="CENTER_LEFT" prefWidth="70.0" text="d1">
+																			               <padding><Insets bottom="2.0" left="4.0" right="4.0" top="2.0" /></padding>
+																			               <font><Font name="System Bold" size="14.0" /></font>
+																				        </TextField>
+																				   </HBox>
+																				   <HBox>
+																					   	<Label alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="30.0" text="3:"  />
+																				   		<TextField fx:id="device4" alignment="CENTER_LEFT" prefWidth="70.0" text="d1">
+																			               <padding><Insets bottom="2.0" left="4.0" right="4.0" top="2.0" /></padding>
+																			               <font><Font name="System Bold" size="14.0" /></font>
+																				        </TextField>
+																				   </HBox>
+																				   
+																				   <HBox>
+																					   	<Label alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="30.0" text="4:"  />
+																				   		<TextField fx:id="device5" alignment="CENTER_LEFT" prefWidth="70.0" text="d1">
+																			               <padding><Insets bottom="2.0" left="4.0" right="4.0" top="2.0" /></padding>
+																			               <font><Font name="System Bold" size="14.0" /></font>
+																				        </TextField>
+																				   </HBox>
+																				   <HBox>
+																					   	<Label alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="30.0" text="5:"  />
+																				   		<TextField fx:id="device6" alignment="CENTER_LEFT" prefWidth="70.0" text="d1">
+																			               <padding><Insets bottom="2.0" left="4.0" right="4.0" top="2.0" /></padding>
+																			               <font><Font name="System Bold" size="14.0" /></font>
+																				        </TextField>
+																				   </HBox>
+																				   
+																				   <HBox>
+																					   	<Label alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="30.0" text="6:"  />
+																				   		<TextField fx:id="device7" alignment="CENTER_LEFT" prefWidth="70.0" text="d1">
+																			               <padding><Insets bottom="2.0" left="4.0" right="4.0" top="2.0" /></padding>
+																			               <font><Font name="System Bold" size="14.0" /></font>
+																				        </TextField>
+																				   </HBox>
+																				   
+																				   <HBox>
+																					   	<Label alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="30.0" text="7:"  />
+																				   		<TextField fx:id="device8" alignment="CENTER_LEFT" prefWidth="70.0" text="d1">
+																			               <padding><Insets bottom="2.0" left="4.0" right="4.0" top="2.0" /></padding>
+																			               <font><Font name="System Bold" size="14.0" /></font>
+																				        </TextField>
+																				   </HBox>
+																				   
+																				   <HBox><Label text=" "/> </HBox>
+																				</children>
+																			</VBox>
+																		</children>
+																    </VBox>
+															</children>
+														</VBox>							
+													
+													</children>	
+												</HBox>
+												
+												<!-- HBox for the timing diagram -->
+												<!-- =========================== -->
+												<HBox prefHeight="500.0"  >
+													<children>
+														<VBox prefHeight="500.0" prefWidth="960.0">
+															<style>
+																-fx-padding:       10;
+																-fx-border-style:  solid inside;
+																-fx-border-width:  2;
+																-fx-border-insets: 0;
+																-fx-border-radius: 5;
+																-fx-border-color:  gray;
+																-fx-background-color: white;
+															</style>
+															<HBox.margin> <Insets top="10.0" /></HBox.margin>											 			
+															<children>
+																<LineChart fx:id="timingDiagram" BorderPane.alignment="CENTER" prefHeight="500.0">
+																  <xAxis>
+																    <NumberAxis side="BOTTOM" />
+																  </xAxis>
+																  <yAxis>
+																    <NumberAxis side="LEFT" />
+																  </yAxis>
+																</LineChart>
+																<!-- Label prefHeight="20.0" prefWidth="300.0" text="Timing Diagram">
+																	<font><Font name="System Bold" size="15.0" /></font>
+																</Label -->
+															</children>
+														</VBox>
+													</children>
+												</HBox>  
+												
+											</children>
+										</VBox>
+									</content>
+								</Tab>
+								<!-- End of Tab "Waterdrop Settings" -->
+								
+								<!-- Start of Tab "Utilities" -->
+								<Tab closable="false" text="Utilities">
+									<content>
+									
+										<!--  Global container for the Utilities tab -->
+										<VBox fillWidth="false">
+											<style>
+												-fx-padding: 10;
+												-fx-border-style:  solid inside;
+												-fx-border-width:  0;
+												-fx-border-insets: 0;
+												-fx-border-radius: 5;
+											</style>
+											<children>
+											
+												<!-- HBox for the uitility functions -->
+												<!-- =============================== -->
+												<HBox prefHeight="500.0"  >
+													<children>
+														<VBox prefHeight="500.0" prefWidth="960.0">
+															<style>
+																-fx-padding:       10;
+																-fx-border-style:  solid inside;
+																-fx-border-width:  2;
+																-fx-border-insets: 0;
+																-fx-border-radius: 5;
+																-fx-border-color:  gray;
+																-fx-background-color: white;
+															</style>
+															
+															<HBox.margin> <Insets top="10.0" /></HBox.margin>											 			
+															<children>
+															
+																<Label prefHeight="20.0" prefWidth="300.0" text="Utilities">
+																	<font><Font name="System Bold" size="15.0" /></font>
+																</Label>
+																
+																<HBox prefHeight = "50">
+																	<Button  text="Reset Settings" onAction="#handleReset"  mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" >
+																		<HBox.margin> <Insets top="20.0"  left="40" /> </HBox.margin>
+																	</Button>
+																	<Label alignment="CENTER_LEFT" prefHeight="25.0" text="Reset all Raspi-Trigger parameters.">
+																		<HBox.margin> <Insets top="20.0"  left="100" /> </HBox.margin>
+																	</Label>
+																</HBox>	
+																														
+																<HBox prefHeight = "50">
+																	<Button fx:id="purgeBtn1" text="Purge Valve 1"  mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" >
+																		<HBox.margin> <Insets top="20.0"  left="40" /> </HBox.margin>
+																	</Button>
+																	<Label alignment="CENTER_LEFT" prefHeight="25.0" text="Press and hold to purge valve 1">
+																		<HBox.margin> <Insets top="20.0"  left="100" /> </HBox.margin>
+																	</Label>
+																</HBox>	
+																
+																<HBox prefHeight = "50">
+																	<Button fx:id="purgeBtn2" text="Purge Valve 2"  mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" >
+																		<HBox.margin> <Insets top="20.0"  left="40" /> </HBox.margin>
+																	</Button>
+																	<Label alignment="CENTER_LEFT" prefHeight="25.0" text="Press and hold to purge valve 2">
+																		<HBox.margin> <Insets top="20.0"  left="100" /> </HBox.margin>
+																	</Label>
+																</HBox>	
+																
+																<HBox prefHeight = "50">
+																	<Button fx:id="purgeBtn3" text="Purge Valve 3"  mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" >
+																		<HBox.margin> <Insets top="20.0"  left="40" bottom="30"/> </HBox.margin>
+																	</Button>
+																	<Label alignment="CENTER_LEFT" prefHeight="25.0" text="Press and hold to purge valve 3">
+																		<HBox.margin> <Insets top="20.0"  left="100" bottom="30"/> </HBox.margin>
+																	</Label>
+																</HBox>	
+																
+																<Label prefHeight="20.0" prefWidth="300.0" text="Project comments"   >
+																	<font><Font name="System Bold" size="15.0" /></font>
+																</Label>
+																
+																<HBox prefHeight = "50">
+																	<TextArea fx:id="projectComment" maxWidth="900" maxHeight="200" minWidth="900"  minHeight="200"    PromptText="Insert project comments here">
+															        	<HBox.margin> <Insets left="40" top="8.0"  /> </HBox.margin>
+															        </TextArea>
+															    </HBox>
+																															
+															</children>
+														</VBox>
+													</children>
+												</HBox>
+											
+											</children>
+										</VBox>
+									</content>
+								</Tab>
+								<!-- End of Tab "Utilities" -->
+								
+							</tabs>
+						</TabPane>
+						<!-- End of the Tab Panel: contains the tabs "Waterdrop Settings"  and "Global Configuration"  -->
+
+					</children>
+				</AnchorPane>
+				<!-- End of Tab Panel Area -->
+				
+			</items>
+		</SplitPane>
+	</children>
+</AnchorPane>
+											

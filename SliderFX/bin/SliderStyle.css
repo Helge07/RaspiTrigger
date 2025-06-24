@@ -1,0 +1,24 @@
+/*
+    Document   : SliderStyle
+    Created on : 18.04.2015, 14:25:59
+    Author     : Projekte
+    Description:
+        Dieses Style-Sheet legt das Aussehen eines
+        Schiebereglers fest. Es werden die Farbe der
+        Reglerbahn und die Farben des berührten und
+        des unberührten Reglerknopfes festgelegt.
+*/
+
+.slider {
+    -fx-base: #b60709;
+    -fx-background-color: #A0A0A0;   
+}
+.slider .thumb {
+    -fx-base: #b60709;
+    -fx-background-color: #F0A0A0;
+}
+.slider .thumb:hover {
+    -fx-base: #b60709;
+    -fx-background-color: #A0F0A0;
+}
+

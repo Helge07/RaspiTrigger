@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;calculatorFX/src/application/calculator.fxml.fxml&apos; to &apos;calculator.fxml&apos;" description="Rename resource &apos;calculator.fxml.fxml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/application/calculator.fxml.fxml" name="calculator.fxml" stamp="1641567591570" updateReferences="true"/>
+</session>

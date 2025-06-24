@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="JavaFX Compilation Script"
+         default="help"
+         basedir="."
+         xmlns:fx="javafx:com.sun.javafx.tools.ant">
+<!--
+  Dieses Build-File ist für die Compilierung einer neueren,
+  durch 7 Module bereitgestellten Version von JavaFX
+  auf der Basis von openjdk-11 bestimmt. 
+
+  Aufbau des Projektverzeichnisses
+     <projekt>
+        build                 - vom Compiler erzeugt
+          classes             - compilierte Klassen
+          jar                 - jar-Datei
+        depcache              - cache für Abhängigkeiten
+        res                   - Verzeichnis für alle Resourcen
+        src                   - Verzeichnis für alle Quellen
+
+  Datum der letzten Überarbeitung:  2020-11-05
+-->
+  <!--
+  <property name="JAVA_HOME" value="/usr/lib/jvm/java-11-openjdk-amd64"/>
+   -->
+  <property name="JAVA_HOME" value="/usr/lib/jvm/default-java"/>
+  <property name="build.src.dir" value="src"/>
+  <property name="build.classes.dir" value="build/classes"/>
+
+  <!--
+  Die nachfolgenden Eigenschaften vereinfachen die Wartung
+  des Skipts.
+  -->
+  <property name="main.class" value="Main"/>
+  <property name="final.jar"  value="build/jar/demo.jar" />
+  <property name="jfx.home"   value="/usr/share/openjfx/lib" />
+  <property name  = "javac.compileargs"
+            value = "-Xlint:all -Xlint:-path "/>
+
+
+  <property name="jfx.modules"
+          value ="${jfx.home}/javafx.base.jar
+                  ${jfx.home}/javafx.controls.jar
+                  ${jfx.home}/javafx.graphics.jar
+                  ${jfx.home}/javafx.fxml.jar
+                  ${jfx.home}/javafx.media.jar
+                  ${jfx.home}/javafx.swing.jar
+                  ${jfx.home}/javafx.web"   />
+
+  <path id="classpath">
+    <fileset dir="/usr/share/java" includes="**/*.jar"/>
+    <pathelement path="build/classes"/>
+  </path>
+
+  <path id="jfx.modulepath">
+    <fileset dir="${jfx.home}" includes="**/*.jar"/>
+  </path>
+
+  <!--
+     Das Target  clean  löscht alle vom Compiler erzeugten
+     *.class-Dateien und die jar-Datei. Vorhandene
+     Abhängigkeiten bleiben bestehen.
+  --> 
+  <target name="clean">
+    <delete dir="build"/>
+  </target>
+
+   <!--
+     Das Target  distclean  löscht alle von diesen Skript
+     erzeugten Dateien. Das Projektverzeichnis wird in
+     einen Zustand versetzt, in dem es problemlos
+     verteilt werden kann.
+  --> 
+  <target name="distclean" depends="clean">
+    <delete dir="depcache"/>
+  </target>
+
+  <!--
+     Das Target  compile  bewirkt die Compilierung aller aller
+     *.java-Dateien, für die *.class-Dateien nicht vorhanden
+     sind oder die *.java-Dateien neuer sind als die zugehörigen
+     *.class-Dateien.  Darüber hinaus werden alle *.java-Dateien
+     neu compiliert, die von Dateien abhängen, für die keine
+     aktuellen *.class-Dateien vorhanden sind.
+     Für die Bestimmung der Abhängigkeiten wird die  ant-Task
+     depend  verwendet, die aus dem Zielverzeichnis alle class-Dateien
+     löscht, die von nicht aktuellen class-Dateien abhängen.
+
+     Die Module von JavaFX  werden durch Compilerargumente
+     sichtbar gemacht.
+  -->
+  <target name="compile" >
+    <mkdir dir ="${build.classes.dir}"/>
+    <depend srcDir ="src"
+            destDir="build/classes"
+            cache ="depcache"
+            closure="yes"
+            dump="true">
+    </depend>
+    <javac includeantruntime="false"
+           srcdir="${build.src.dir}"
+           destdir="${build.classes.dir}"
+           fork="yes"
+           executable="${JAVA_HOME}/bin/javac"
+           debug="on"
+           classpathref="classpath"
+           modulepathref="jfx.modulepath">
+      <compilerarg line="${javac.compileargs}"/>
+    </javac>
+    <copy todir="${build.classes.dir}">
+       <fileset dir="${build.src.dir}"   excludes="**/*.java">
+      </fileset>
+    </copy>
+     <!--
+        Dieser copy-Befehl kopiert Resourcen aus den
+        Verzeichnissen in src in die entsprechenden Verzeichnisse
+        in build/classes.
+        Das ist ziemlich trickreich. 
+     -->
+  </target>
+
+
+  <!--
+      Das Target  jar  bewirkt die Herstellung einer jar-Datei.
+      Falls class-Dateien fehlen oder nicht aktuell sind, wird
+      vorher inkrementell compiliert.
+      Der jar-Datei wird das Ausführungsrecht in allen drei
+      Berechtigungsklassen erteilt. Auf vielen Linux-Systemen
+      kann die jar-Datei dann mit einem Doppelklick gestartet
+      werden.
+  -->
+  <target name="jar" depends="compile">
+    <jar destfile="${final.jar}">
+       <fileset dir ="build/classes"/>
+       <manifest>
+          <attribute name="Main-Class" value="${main.class}" />
+          <attribute name="Class-Path" value="${jfx.modules}" />
+       </manifest>
+    </jar>
+    <chmod file="${final.jar}"  perm="ugo+x"/>
+  </target>
+ 
+  <!--
+     Das Target  run  führt das Programm aus.
+     Das Programm wird erforderlichenfalls zunächst hergestellt.
+  -->
+  <target name="run" depends="compile">
+      <java 
+          fork="true"
+          classname="${main.class}"
+          classpathref="classpath"
+          modulepathref="jfx.modulepath">
+	  </java>
+  </target>
+
+
+  <!--
+     Das Target  run-jar  führt eine vorhandene jar-Datei aus.
+     Die jar-Datei wird erforderlichenfalls hergestellt.
+  -->
+  <target name="run-jar" depends="jar">
+      <java jar="${final.jar}" fork="true">
+      </java>
+  </target>
+
+  <target name="help">
+    <echo>Mögliche Optionen für dieses Ant file:
+     help       Ausgabe dieser Anleitung.
+     compile    Aufruf des Java Compilers.
+     run        Ausführung des compilierten Programms. Falls
+                erforderlich wird vorher compiliert. Eine jar-Datei
+                wird weder benötigt noch verwendet.
+     jar        Herstellung einer jar-Datei. Falls erforderlich
+                wird vorher compiliert.
+     run-jar    Ausführung des als jar-Datei bereitgestellten
+                Programms. Falls erforderlich wird vorher
+                compiliert und eine jar-Datei erzeugt.
+     clean      Löschung aller vom Compiler erzeugten Klassen
+                und Löschung der jar-Datei.
+     distclean  Löschung aller vom Compiler erzeugten Dateien.</echo>
+  </target>
+  
+</project>
