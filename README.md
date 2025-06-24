@@ -43,8 +43,7 @@ Detailed instructions can be found in the directiory /docs:
 - instructions for building the junction box.
 
 ## License
-EosMonitor is published under the GPL-3.0 license. See the LICENSE file for more information. The EDSDK files EDSDK.dll and EdsImage.dll are distributed with permission of Canon.
-
+EosMonitor is published under the GPL-3.0 license. See the LICENSE file for more information. 
 
 
 
