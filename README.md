@@ -12,9 +12,9 @@ A hardware + software solution based on the Raspberry PI
 ## Introduction
 When photographing water drop sculptures, exact timing is very important:
 
-− The size and release time of the drops must be precisely controlled by solenoid valves.
-− The flashes must triggered within milliseconds.
-− The flash duration must be < 100 microseconds to freeze the movement
+- the size and release time of the drops must be precisely controlled by solenoid valves,
+- the flashes must triggered within milliseconds,
+- the flash duration must be < 100 microseconds to freeze the movement
 
 ## Requirements
 Until now solutions for exact, reproducible timing are based on
