@@ -29,7 +29,9 @@ The connection to the connected devices is established by a junction box, which 
 ## Compilation_and_Installation
 To compile the `RasPiTrigger` program, follow these steps:
 - get the repository from https://github.com/Helge07/RaspiTrigger
-- a compiled program `RasPiTrigger.jar` can be found in the directory  ...\eclipse-workspace\RasPiTrigger\Export. It is designded to run on a Raspberry Pi, but to play with the user interface it can also be called under Windows.
+- open the workspace  `...\eclipse-workspace` with Eclipse 
+- run `RasPiTrigger`
+- an already compiled `RasPiTrigger.jar` can be found in the directory  ...\eclipse-workspace\RasPiTrigger\Export. It is designded to run on a Raspberry Pi, but to play with the user interface it can directly be called under Windows.
 
 ## Usage   
 Detailed instructions can be found in the directiory /docs:
