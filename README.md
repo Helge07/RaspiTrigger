@@ -16,7 +16,7 @@ When photographing water drop sculptures, exact timing is very important:
 
 − The flashes must triggered within milliseconds. 
 
-- The flash duration must be < 100 microseconds to freeze the movement
+− The flash duration must be < 100 microseconds to freeze the movement
 
 ## Requirements
 Until now solutions for exact, reproducible timing are based on
