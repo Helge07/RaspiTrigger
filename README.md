@@ -16,11 +16,13 @@ When photographing water drop sculptures, exact timing is very important:
 
 − The flashes must triggered within milliseconds. 
 
-- flash duration must be < 100 microseconds to freeze the movement
+- The flash duration must be < 100 microseconds to freeze the movement
 
 ## Requirements
 Until now solutions for exact, reproducible timing are based on
+
 −	Hardware devices whose parameters are adjusted via controllers or
+
 −	Hardware controllers and Arduino or Raspberry Pi based DYI solutions that receive control data from a PC
 
 The RasPiTrigger differs from the above solutions in that all functionalities are implemented on a Raspberry Pi, namely:
