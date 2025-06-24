@@ -24,6 +24,7 @@ Until now solutions for exact, reproducible timing are based on
 The RasPiTrigger differs from the above solutions in that all functionalities are implemented on a Raspberry Pi, namely:
 - the setting of parameters via a graphical user interface and
 - the timing of all processes (camera shutter, flash units and solenoid valves).
+- 
 The connection to the connected devices is established by a junction box, which electrically separates them from the GPIO ports of the Raspberry Pi.
  
 ## Compilation_and_Installation
