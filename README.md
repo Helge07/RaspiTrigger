@@ -1,5 +1,6 @@
 # RasPiTrigger 
-Take Water drop photos with the Raspberry Pi: A hardware + software solution based on the Raspberry PI
+How to take Water drop photos with the Raspberry Pi: 
+A hardware + software solution based on the Raspberry PI
 
 ## Table of contents
 - [Introduction](#Introduction)
