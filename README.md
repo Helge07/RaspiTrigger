@@ -24,15 +24,16 @@ Until now solutions for exact, reproducible timing are based on
 The RasPiTrigger differs from the above solutions in that all functionalities are implemented on a Raspberry Pi, namely:
 - the setting of parameters via a graphical user interface and
 - the timing of all processes (camera shutter, flash units and solenoid valves).
-- 
-The connection to the connected devices is established by a junction box, which electrically separates them from the GPIO ports of the Raspberry Pi.
+- The connection to the connected devices is established by a junction box, which electrically separates them from the GPIO ports of the Raspberry Pi.
  
 ## Compilation_and_Installation
 To compile the `RasPiTrigger` program, follow these steps:
 - get the repository from https://github.com/Helge07/RaspiTrigger
 - open the workspace  `...\eclipse-workspace` with Eclipse 
 - run `RasPiTrigger`
-- an already compiled `RasPiTrigger.jar` can be found in the directory  ...\eclipse-workspace\RasPiTrigger\Export. It is designded to run on a Raspberry Pi, but to play with the user interface it can directly be called under Windows.
+- an already compiled `RasPiTrigger.jar` can be found in the directory  ...\eclipse-workspace\RasPiTrigger\Export.
+
+- `RasPiTrigger` is designded to run on a Raspberry Pi, but to play with the user interface it can directly be called under Windows.
 
 ## Usage   
 Detailed instructions can be found in the directiory /docs:
