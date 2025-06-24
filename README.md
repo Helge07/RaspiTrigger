@@ -18,7 +18,7 @@ When photographing water drop sculptures, exact timing is very important:
 
 ## Requirements
 Until now solutions for exact, reproducible timing are based on
-- Hardware devices whose parameters are adjusted via controllers or
+- Devices whose parameters are adjusted via hardware controllers or
 - Hardware controllers and Arduino or Raspberry Pi based DYI solutions that receive control data from a PC
 
 The RasPiTrigger differs from the above solutions in that all functionalities are implemented on a Raspberry Pi, namely:
