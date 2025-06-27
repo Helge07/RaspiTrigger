@@ -42,6 +42,9 @@ Detailed instructions can be found in the directiory /docs:
 - instructions for installing the `RasPiTrigger` on the Raspberry Pi
 - instructions for building the junction box.
 
+## RasPiTrigger on GitHub Pages
+- https://helge07.github.io/RaspiTrigger/
+
 ## License
 EosMonitor is published under the GPL-3.0 license. See the LICENSE file for more information. 
 
